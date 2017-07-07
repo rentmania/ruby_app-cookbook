@@ -93,19 +93,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         }
       ],
       nginx: {
-        "version": "1.10.2",
         "dir": "/etc/nginx",
         "log_dir": "/var/log/nginx",
-        'install_method': 'source',
-        "init_style": "systemd",
-        "source": {
-          "checksum": "1045ac4987a396e2fa5d0011daf8987b612dd2f05181b67507da68cbe7d765c2",
-          "modules": [
-            "chef_nginx::http_stub_status_module",
-            "chef_nginx::http_ssl_module",
-            "chef_nginx::http_gzip_static_module"
-          ]
-        },
+        'install_method': 'package',
         "default_site_enabled": false
       },
     }
