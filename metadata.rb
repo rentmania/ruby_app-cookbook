@@ -1,6 +1,6 @@
 name             'ruby_app'
-maintainer       'YOUR_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'Artem Bykov'
+maintainer_email 'artem.bikov@gmail.com'
 license          'All rights reserved'
 description      'Installs/Configures ruby_app'
 long_description 'Installs/Configures ruby_app'
