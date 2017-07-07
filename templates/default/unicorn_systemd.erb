@@ -1,0 +1,18 @@
+[Unit]
+Description=Unicorn server for <%= @app_name %>
+After=network.target
+
+[Service]
+SyslogIdentifier=unicorn_<%= @app_name %>
+User=ubuntu
+PIDFile=<%= @app_shared %>/tmp/pids/unicorn.pid
+WorkingDirectory=<%= @app_root %>/current
+Restart=on-failure
+
+ExecStart=/bin/bash -c 'source /home/ubuntu/.rvm/scripts/rvm && bundle exec unicorn -D -E <%= @env %> -c <%= @app_root %>/current/config/unicorn/<%= @env %>.rb'
+#ExecReload=/bin/kill -s HUP $MAINPID
+ExecReload=/bin/kill -s USR2 $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+[Install]
+WantedBy=multi-user.target

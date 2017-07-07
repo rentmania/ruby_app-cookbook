@@ -1,0 +1,7 @@
+name             'ruby_app'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures ruby_app'
+long_description 'Installs/Configures ruby_app'
+version          '0.1.0'
