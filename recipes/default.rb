@@ -31,7 +31,7 @@ node['ruby_apps'].each do |site|
         port: env['port']
       )
 
-        notifies :reload, 'service[nginx]', :immediately
+      notifies :reload, 'service[nginx]', :immediately
     end
 
     link "/etc/nginx/sites-enabled/#{app_name}" do
