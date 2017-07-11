@@ -27,7 +27,8 @@ node['ruby_apps'].each do |site|
         app_name: app_name,
         domains: env[:domains],
         app_root: app_root,
-        app_shared: app_shared
+        app_shared: app_shared,
+        port: env['port']
       )
 
         notifies :reload, 'service[nginx]', :immediately

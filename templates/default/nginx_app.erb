@@ -18,7 +18,7 @@ server {
   ssl_certificate     /etc/nginx/ssl/rentmania.org.2017.bundle.crt;
   ssl_certificate_key /etc/nginx/ssl/rentmania.org.2017.key;
   <% else %>
-  listen 80;
+  listen <%= @port || '80' %>;
   <% end %>
 
   gzip on;
