@@ -9,6 +9,21 @@ server {
 }
 <% end %>
 
+server {
+  <% if @has_ssl %>
+  listen 443 ssl;
+  ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers         HIGH:!aNULL:!MD5;
+  ssl_certificate     /etc/nginx/ssl/rentmania.org.2017.bundle.crt;
+  ssl_certificate_key /etc/nginx/ssl/rentmania.org.2017.key;
+  <% else %>
+  listen <%= @port || '80' %>;
+  <% end %>
+
+  server_name "~^www\.(.*)$" ;
+  return 301 $scheme://$1$request_uri;
+}
+
 
 server {
   <% if @has_ssl %>
@@ -61,6 +76,6 @@ server {
   }
 
 #    error_page 500 502 503 504 /500.html;
-    client_max_body_size 4G;
-    keepalive_timeout 10;
+  client_max_body_size 4G;
+  keepalive_timeout 10;
 }
