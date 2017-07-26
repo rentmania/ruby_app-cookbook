@@ -9,6 +9,7 @@ server {
 }
 <% end %>
 
+<% if @www_redirect %>
 server {
   <% if @has_ssl %>
   listen 443 ssl;
@@ -20,9 +21,10 @@ server {
   listen <%= @port || '80' %>;
   <% end %>
 
-  server_name "~^www\.(.*)$" ;
+  server_name ~^www\.(.+)$;
   return 301 $scheme://$1$request_uri;
 }
+<% end %>
 
 
 server {
