@@ -45,6 +45,7 @@ node['ruby_apps'].each do |site|
         variables(
           app_name: app_name,
           app_root: app_root,
+          app_shared: app_shared,
           env: env_name
         )
       end

@@ -10,9 +10,9 @@ UMask=0002
 WorkingDirectory=<%= @app_root %>/current
 Restart=on-failure
 
-ExecStart=/bin/bash -c 'source /home/ubuntu/.rvm/scripts/rvm && bundle exec sidekiq -e <%= @env %> -C <%= @app_root %>/current/config/sidekiq.yml'
-ExecReload=/bin/kill -s USR1 $MAINPID
-ExecStop=/bin/kill -s QUIT $MAINPID
+ExecStart=/bin/bash -c 'source /home/ubuntu/.rvm/scripts/rvm && bundle exec sidekiq -e <%= @env %> -C <%= @app_root %>/current/config/sidekiq.yml -P <%= @app_shared %>/tmp/pids/sidekiq.pid'
+ExecReload=/bin/bash -c 'source /home/ubuntu/.rvm/scripts/rvm && bundle exec sidekiqctl quiet <%= @app_shared %>/tmp/pids/sidekiq.pid'
+ExecStop=/bin/bash -c 'source /home/ubuntu/.rvm/scripts/rvm && bundle exec sidekiqctl stop <%= @app_shared %>/tmp/pids/sidekiq.pid'
 
 # output goes to /var/log/syslog
 StandardOutput=syslog
