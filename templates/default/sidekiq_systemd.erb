@@ -1,0 +1,22 @@
+[Unit]
+Description=Sidekiq for <%= @app_name %>
+After=syslog.target network.target
+
+[Service]
+SyslogIdentifier=sidekiq_<%= @app_name %>
+User=ubuntu
+Group=ubuntu
+UMask=0002
+WorkingDirectory=<%= @app_root %>/current
+Restart=on-failure
+
+ExecStart=/bin/bash -c 'source /home/ubuntu/.rvm/scripts/rvm && bundle exec sidekiq -e <%= @env %> -C <%= @app_root %>/current/config/sidekiq.yml'
+ExecReload=/bin/kill -s USR1 $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+# output goes to /var/log/syslog
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

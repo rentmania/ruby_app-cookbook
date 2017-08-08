@@ -80,6 +80,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         {
           name: :test,
           root: '/home/ubuntu',
+          sidekiq: true,
           environments: [
             {
               name: :production,

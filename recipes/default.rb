@@ -38,5 +38,16 @@ node['ruby_apps'].each do |site|
     link "/etc/nginx/sites-enabled/#{app_name}" do
       to "/etc/nginx/sites-available/#{app_name}"
     end
+
+    if site['sidekiq']
+      template "/etc/systemd/system/sidekiq_#{app_name}.service" do
+        source 'sidekiq_systemd.erb'
+        variables(
+          app_name: app_name,
+          app_root: app_root,
+          env: env_name
+        )
+      end
+    end
   end
 end
