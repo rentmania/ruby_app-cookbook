@@ -85,7 +85,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
               domains: ['test.ru', 'test1.ru']
             },
             staging: {
-              domains: ['test_st.ru', 'test1_st.ru']
+              domains: ['test_st.ru', 'test1_st.ru'],
+              db: {
+                name: 'test',
+                password: 'test_pass',
+                database: 'test_db'
+              }
             }
           }
         }

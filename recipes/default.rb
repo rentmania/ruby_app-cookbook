@@ -49,5 +49,24 @@ node['ruby_apps'].each do |app, site|
         )
       end
     end
+
+    if env['db']
+      shared_configs = "#{app_shared}/config"
+      [app_root, app_shared, shared_configs].each do |dir|
+        directory dir do
+          mode '0755'
+          action :create
+        end
+      end
+
+      template "#{shared_configs}/database.yml" do
+        source 'database.yml.erb'
+        variables(
+          database: env['db']['database'],
+          user: env['db']['name'],
+          password: env['db']['password'],
+        )
+      end
+    end
   end
 end
