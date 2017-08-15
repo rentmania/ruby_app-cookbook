@@ -1,9 +1,8 @@
-node['ruby_apps'].each do |site|
+node['ruby_apps'].each do |app, site|
   apps_root = site['root']
 
-  site['environments'].each do |env|
-    env_name = env['name']
-    app_name = "#{site['name']}_#{env_name}"
+  site['environments'].each do |env_name, env|
+    app_name = "#{app}_#{env_name}"
     app_root = "#{apps_root}/#{app_name}"
     app_shared = "#{app_root}/shared"
 

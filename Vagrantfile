@@ -76,23 +76,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      ruby_apps: [
-        {
-          name: :test,
+      ruby_apps: {
+        test: {
           root: '/home/ubuntu',
           sidekiq: true,
-          environments: [
-            {
-              name: :production,
+          environments: {
+            production: {
               domains: ['test.ru', 'test1.ru']
             },
-            {
-              name: :staging,
+            staging: {
               domains: ['test_st.ru', 'test1_st.ru']
             }
-          ]
+          }
         }
-      ],
+      },
       nginx: {
         "dir": "/etc/nginx",
         "log_dir": "/var/log/nginx",
