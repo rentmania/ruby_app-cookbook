@@ -72,6 +72,7 @@ node['ruby_apps'].each do |app, site|
       template "#{shared_configs}/database.yml" do
         source 'database.yml.erb'
         variables(
+          env: env_name,
           database: env['db']['database'],
           user: env['db']['name'],
           password: env['db']['password'],
