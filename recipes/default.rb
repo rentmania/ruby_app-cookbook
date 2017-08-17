@@ -79,4 +79,12 @@ node['ruby_apps'].each do |app, site|
       end
     end
   end
+
+  if site['dependencies'] && site['dependencies']['packages']
+    site['dependencies']['packages'].each do |package_name|
+      package package_name do
+        action :install
+      end
+    end
+  end
 end

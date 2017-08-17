@@ -80,6 +80,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         test: {
           user: 'vagrant',
           sidekiq: true,
+          dependencies: {
+            packages: %w(libcurl3 libcurl3-gnutls libcurl4-openssl-dev)
+          },
           environments: {
             production: {
               domains: ['test.ru', 'test1.ru']
