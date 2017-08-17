@@ -78,7 +78,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json = {
       ruby_apps: {
         test: {
-          root: '/home/ubuntu',
+          user: 'vagrant',
           sidekiq: true,
           environments: {
             production: {

@@ -1,5 +1,6 @@
 node['ruby_apps'].each do |app, site|
-  apps_root = site['root']
+  user = site['user']
+  apps_root = "/home/#{user}"
 
   site['environments'].each do |env_name, env|
     app_name = "#{app}_#{env_name}"
@@ -50,13 +51,22 @@ node['ruby_apps'].each do |app, site|
       end
     end
 
+    [app_root, app_shared].each do |dir|
+      directory dir do
+        mode '0755'
+        owner user
+        group user
+        action :create
+      end
+    end
+
     if env['db']
       shared_configs = "#{app_shared}/config"
-      [app_root, app_shared, shared_configs].each do |dir|
-        directory dir do
-          mode '0755'
-          action :create
-        end
+      directory shared_configs do
+        mode '0755'
+        owner user
+        group user
+        action :create
       end
 
       template "#{shared_configs}/database.yml" do
